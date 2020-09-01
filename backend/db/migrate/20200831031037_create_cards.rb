@@ -3,7 +3,7 @@ class CreateCards < ActiveRecord::Migration[6.0]
     create_table :cards do |t|
       t.string :question
       t.string :answer
-      t.references :collection, index: true, foreign_key: true
+      t.references :collection, index: true, null: false, foreign_key: true
       
       t.timestamps
     end
