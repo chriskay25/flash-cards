@@ -21,3 +21,10 @@ collection1.cards.create([
   {question: "'{}', in Javascript terms, represents a...", answer: "object"},
   {question: "True or False: the properties(keys) of JS Objects can point to any data type, including other Objects.", answer: "true"}
 ])
+
+collection2 = Collection.create(name: "Biology")
+collection2.cards.create([
+  {question: "What openings in a leaf allow gas exchange?", answer: "stomata"},
+  {question: "Fish take in oxygen through their gills; what do insects take in oxygen through?", answer: "spiracles"},
+  {question: "Which nutrient group is used to help grow and repair cells?", answer: "proteins"},
+])
