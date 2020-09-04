@@ -7,7 +7,20 @@ document.addEventListener('DOMContentLoaded', () => {
   console.log("Dom is loaded!")
   cardForm.style.display = "none"
   cardContainer.style.display = "none"
+  getCollections()
 })
+
+function getCollections() {
+  fetch("http://localhost:3000/api/v1/collections")
+  .then(resp => resp.json())
+  .then(collections => {
+    displayCollections(collections)
+  })
+}
+
+function displayCollections(collections) {
+  console.log(collections)
+}
 
 // function getCards() {
 //   fetch(endPoint)
