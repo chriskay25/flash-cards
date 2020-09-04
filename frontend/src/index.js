@@ -27,11 +27,12 @@ function displayCollections(collections) {
   collection.append(offerChoice)
   // Iterate over list of collections, creating buttons for each
   collections.data.forEach(choice => {
+    // debugger
     console.log(choice)
     const button = document.createElement('button')
-    button.innerHTML += choice.attributes.name
+    button.innerHTML = choice.attributes.name
     // Insert collection button into div
-    collection.appendChild(button)
+    collection.append(button)
 
     button.addEventListener("click", function() {
       getCards(this.innerHTML)
@@ -46,21 +47,25 @@ function getCards(name) {
     .then(cards => correctCards(cards, name))
   }
   
-  function correctCards(cards, name) {
-    collectionChoice.style.display = "none"
-    // Make the card container visible
-    cardContainer.style.display = "block"
-    const chosenCards = []
-    cards.data.forEach(card => {
-      if (card.attributes.collection.name === name) {
-        chosenCards.push(card)
-      }
-    })
-    cardIterator(chosenCards)
-  }
+function correctCards(cards, name) {
+  collectionChoice.style.display = "none"
+  // Make the card container visible
+  cardContainer.style.display = "block"
+  const chosenCards = []
+  cards.data.forEach(card => {
+    if (card.attributes.collection.name === name) {
+      chosenCards.push(card)
+    }
+  })
+  cardIterator(chosenCards)
+}
   
-  function cardIterator(cards) {
-    console.log(cards)
+function cardIterator(cards) {
+  console.log(cards)
+  const q = document.querySelector("#question-display")
+  cards.forEach(card => {
+    q.innerHTML = card.attributes.question
+  })
 }
 
 // function getCards() {
