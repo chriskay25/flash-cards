@@ -19,7 +19,28 @@ function getCollections() {
 }
 
 function displayCollections(collections) {
-  console.log(collections)
+  // Display choices
+  const collection = document.querySelector(".collection-choice")
+  // Ask what collection they want to study
+  const offerChoice = document.createElement('h3')
+  offerChoice.innerHTML = "Which collection would you like to study?"
+  collection.append(offerChoice)
+  // Iterate over list of collections, creating buttons for each
+  collections.data.forEach(choice => {
+    console.log(choice)
+    const button = document.createElement('button')
+    button.innerHTML += choice.attributes.name
+    // Insert collection button into div
+    collection.appendChild(button)
+
+    button.addEventListener("click", function() {
+      getCards(this.innerHTML)
+    })
+  })
+}
+
+function getCards(name) {
+  console.log(name)
 }
 
 // function getCards() {
