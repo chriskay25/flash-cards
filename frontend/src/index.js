@@ -40,7 +40,27 @@ function displayCollections(collections) {
 }
 
 function getCards(name) {
-  console.log(name)
+  // Fetches cards to pass along
+  fetch(endPoint)
+    .then(resp => resp.json())
+    .then(cards => correctCards(cards, name))
+  }
+  
+  function correctCards(cards, name) {
+    collectionChoice.style.display = "none"
+    // Make the card container visible
+    cardContainer.style.display = "block"
+    const chosenCards = []
+    cards.data.forEach(card => {
+      if (card.attributes.collection.name === name) {
+        chosenCards.push(card)
+      }
+    })
+    cardIterator(chosenCards)
+  }
+  
+  function cardIterator(cards) {
+    console.log(cards)
 }
 
 // function getCards() {
