@@ -1,8 +1,12 @@
 const endPoint = "http://localhost:3000/api/v1/cards"
+const cardForm = document.querySelector(".form-container")
+const cardContainer = document.querySelector("#card-container")
+const collectionChoice = document.querySelector(".collection-choice")
 
 document.addEventListener('DOMContentLoaded', () => {
   console.log("Dom is loaded!")
-  
+  cardForm.style.display = "none"
+  cardContainer.style.display = "none"
 })
 
 // function getCards() {
