@@ -7,7 +7,7 @@ class Collection {
     Collection.all.push(this)
   }
 
-  renderCollection() {
+  renderCollectionButton() {
     let button = document.createElement("button")
     button.innerHTML = this.name
     collectionChoice.append(button)
