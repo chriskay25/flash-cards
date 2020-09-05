@@ -14,30 +14,12 @@ function getCollections() {
   fetch("http://localhost:3000/api/v1/collections")
   .then(resp => resp.json())
   .then(collections => {
+    const offerChoice = document.createElement('h3')
+    offerChoice.innerHTML = "Which collection would you like to study?"
+    collectionChoice.append(offerChoice)
     collections.data.forEach(collection => {
-      new Collection(collection)
-    })
-    displayCollections(collections)
-  })
-}
-
-function displayCollections(collections) {
-  // Display choices
-  const collection = document.querySelector(".collection-choice")
-  // Ask what collection they want to study
-  const offerChoice = document.createElement('h3')
-  offerChoice.innerHTML = "Which collection would you like to study?"
-  collection.append(offerChoice)
-  // Iterate over list of collections, creating buttons for each
-  collections.data.forEach(choice => {
-    // debugger
-    const button = document.createElement('button')
-    button.innerHTML = choice.attributes.name
-    // Insert collection button into div
-    collection.append(button)
-
-    button.addEventListener("click", function() {
-      getCards(this.innerHTML)
+      let newCollection = new Collection(collection)
+      newCollection.renderCollectionButton()
     })
   })
 }
