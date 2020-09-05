@@ -14,6 +14,9 @@ function getCollections() {
   fetch("http://localhost:3000/api/v1/collections")
   .then(resp => resp.json())
   .then(collections => {
+    collections.data.forEach(collection => {
+      new Collection(collection)
+    })
     displayCollections(collections)
   })
 }
@@ -28,7 +31,6 @@ function displayCollections(collections) {
   // Iterate over list of collections, creating buttons for each
   collections.data.forEach(choice => {
     // debugger
-    console.log(choice)
     const button = document.createElement('button')
     button.innerHTML = choice.attributes.name
     // Insert collection button into div
