@@ -1,4 +1,4 @@
-const endPoint = "http://localhost:3000/api/v1/cards"
+const endPoint = "http://localhost:3000/api/v1"
 const cardForm = document.querySelector(".form-container")
 const cardContainer = document.querySelector("#card-container")
 const collectionChoice = document.querySelector(".collection-choice")
@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 function getCollections() {
-  fetch("http://localhost:3000/api/v1/collections")
+  fetch(endPoint + "/collections")
   .then(resp => resp.json())
   .then(collections => {
     const offerChoice = document.createElement('h3')
