@@ -34,18 +34,20 @@ function getChosenCollection(id) {
 function chosenCollection(collection) {
   collectionChoice.style.display = "none" // hide collection choice
   cardContainer.style.display = "block" // make card container visible
-  collection.attributes.cards.forEach(card => {
-    c = new Card(card)
+  collection.attributes.cards.forEach(newCard => {
+    let card = new Card(newCard)
+    populateCard(card)
   })
-  
 }
-  
-function cardIterator(cards) {
-  console.log(cards)
+
+function populateCard(card) {
   const q = document.querySelector("#question-display")
-  cards.forEach(card => {
-    q.innerHTML = card.attributes.question
+  q.innerHTML = card.question
+  const c = document.querySelector("#collection-name")
+  c.innerHTML = card.collection.name
+  const bttn = document.querySelector("#submit-answer")
+  bttn.addEventListener("click", function() {
+    let answer = document.querySelector("#user-answer").value
+    console.log(`submitted: ${answer}`, `actual: ${card.answer}`)
   })
 }
-
-
