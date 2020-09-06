@@ -19,7 +19,7 @@ class Collection {
   }
 
   static findById(id) {
-    return this.all.find(collection => collection.id === id);
+    return this.all.find(collection => parseInt(collection.id) === id);
   }
 
 }
