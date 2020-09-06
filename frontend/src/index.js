@@ -24,11 +24,11 @@ function getCollections() {
   })
 }
 
-function getCards(name) {
+function getChosenCollection(id) {
   // Fetches cards to pass along
-  fetch(endPoint)
+  fetch(endPoint + `/collections/${id}`)
     .then(resp => resp.json())
-    .then(cards => correctCards(cards, name))
+    .then(collection => chosenCollection(collection.data))
   }
   
 function correctCards(cards, name) {
