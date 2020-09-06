@@ -8,6 +8,10 @@ class Card {
     Card.all.push(this)
   }
 
+  get collection() {
+    return Collection.findById(this.collection_id)
+  }
+
 }
 
 Card.all = []
