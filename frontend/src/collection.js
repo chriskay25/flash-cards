@@ -10,11 +10,16 @@ class Collection {
   renderCollectionButton() {
     let button = document.createElement("button")
     button.innerHTML = this.name
+    button.dataset.id = this.id 
     collectionChoice.append(button)
 
     button.addEventListener("click", function() {
-      getCards(this.innerHTML)
+      getChosenCollection(this.dataset.id)
     })
+  }
+
+  static findById(id) {
+    return this.all.find(collection => collection.id === id);
   }
 
 }
