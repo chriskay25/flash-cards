@@ -31,17 +31,13 @@ function getChosenCollection(id) {
     .then(collection => chosenCollection(collection.data))
   }
   
-function correctCards(cards, name) {
-  collectionChoice.style.display = "none"
-  // Make the card container visible
-  cardContainer.style.display = "block"
-  const chosenCards = []
-  cards.data.forEach(card => {
-    if (card.attributes.collection.name === name) {
-      chosenCards.push(card)
-    }
+function chosenCollection(collection) {
+  collectionChoice.style.display = "none" // hide collection choice
+  cardContainer.style.display = "block" // make card container visible
+  collection.attributes.cards.forEach(card => {
+    c = new Card(card)
   })
-  cardIterator(chosenCards)
+  
 }
   
 function cardIterator(cards) {
@@ -52,20 +48,4 @@ function cardIterator(cards) {
   })
 }
 
-// function getCards() {
-//   fetch(endPoint)
-//   .then(resp => resp.json())
-//   .then(cards => {
-//     cards.data.forEach(card => {
-//       const cardMarkup = `
-//         <div data-id=${card.id}>
-//           <p>Question: ${card.attributes.question}</p>
-//           <p>Answer: ${card.attributes.answer}</p>
-//         </div>
-//       `;
-//       document.querySelector('#card-container').innerHTML += cardMarkup
-
-//     })
-//   })
-// }
 
