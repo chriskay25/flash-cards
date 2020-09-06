@@ -4,6 +4,10 @@ class Card {
     this.id = data.id
     this.question = data.question
     this.answer = data.answer
+    this.collection_id = data.collection_id
+    Card.all.push(this)
   }
 
 }
+
+Card.all = []
