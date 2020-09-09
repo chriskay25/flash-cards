@@ -24,12 +24,15 @@ function getCollections() {
   })
 }
   
-function chosenCollection(collection) {
+function chosenCollection() {
+  const collectionCards = []
   collectionChoice.style.display = "none" // hide collection choice
   cardContainer.style.display = "block" // make card container visible
-  collection.attributes.cards.forEach(newCard => {
-    let card = new Card(newCard)
-    populateCard(card)
+  let collection = Collection.findById(parseInt(this.dataset.id))
+  
+  collection.cards.forEach(card => {
+    let newCard = new Card(card)
+    collectionCards.push(newCard)
   })
 }
 
