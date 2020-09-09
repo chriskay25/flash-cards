@@ -1,4 +1,4 @@
-const endPoint = "http://localhost:3000/api/v1/cards"
+const endPoint = "http://localhost:3000/api/v1"
 const cardForm = document.querySelector(".form-container")
 const cardContainer = document.querySelector("#card-container")
 const collectionChoice = document.querySelector(".collection-choice")
@@ -11,77 +11,59 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 function getCollections() {
-  fetch("http://localhost:3000/api/v1/collections")
+  fetch(endPoint + "/collections")
   .then(resp => resp.json())
   .then(collections => {
-    displayCollections(collections)
-  })
-}
-
-function displayCollections(collections) {
-  // Display choices
-  const collection = document.querySelector(".collection-choice")
-  // Ask what collection they want to study
-  const offerChoice = document.createElement('h3')
-  offerChoice.innerHTML = "Which collection would you like to study?"
-  collection.append(offerChoice)
-  // Iterate over list of collections, creating buttons for each
-  collections.data.forEach(choice => {
-    // debugger
-    console.log(choice)
-    const button = document.createElement('button')
-    button.innerHTML = choice.attributes.name
-    // Insert collection button into div
-    collection.append(button)
-
-    button.addEventListener("click", function() {
-      getCards(this.innerHTML)
+    const offerChoice = document.createElement('h3')
+    offerChoice.innerHTML = "Which collection would you like to study?"
+    collectionChoice.append(offerChoice)
+    collections.data.forEach(collection => {
+      let newCollection = new Collection(collection)
+      newCollection.renderCollectionButton()
     })
   })
 }
-
-function getCards(name) {
-  // Fetches cards to pass along
-  fetch(endPoint)
-    .then(resp => resp.json())
-    .then(cards => correctCards(cards, name))
-  }
   
-function correctCards(cards, name) {
-  collectionChoice.style.display = "none"
-  // Make the card container visible
-  cardContainer.style.display = "block"
-  const chosenCards = []
-  cards.data.forEach(card => {
-    if (card.attributes.collection.name === name) {
-      chosenCards.push(card)
+function chosenCollection() {
+  const collectionCards = []
+  collectionChoice.style.display = "none" // hide collection choice
+  cardContainer.style.display = "block" // make card container visible
+  let collection = Collection.findById(parseInt(this.dataset.id))
+  
+  collection.cards.forEach(card => {
+    let newCard = new Card(card)
+    collectionCards.push(newCard)
+  })
+
+  delayIteration(collectionCards)
+}
+
+function delayIteration(collectionCards) {
+  const delayLoop = (delay) => {
+    return (x, i) => {
+      setTimeout(() => {
+        x.renderCard()
+      }, i * delay);
     }
-  })
-  cardIterator(chosenCards)
-}
-  
-function cardIterator(cards) {
-  console.log(cards)
-  const q = document.querySelector("#question-display")
-  cards.forEach(card => {
-    q.innerHTML = card.attributes.question
-  })
+  }
+  collectionCards.forEach(delayLoop(15000))
 }
 
-// function getCards() {
-//   fetch(endPoint)
-//   .then(resp => resp.json())
-//   .then(cards => {
-//     cards.data.forEach(card => {
-//       const cardMarkup = `
-//         <div data-id=${card.id}>
-//           <p>Question: ${card.attributes.question}</p>
-//           <p>Answer: ${card.attributes.answer}</p>
-//         </div>
-//       `;
-//       document.querySelector('#card-container').innerHTML += cardMarkup
-
-//     })
-//   })
-// }
-
+function checkAnswer(id) {
+  let card = Card.findById(parseInt(id))
+  let userAnswer = document.querySelector("#user-answer")
+  let correctIncorrect = document.querySelector("#correct-incorrect")
+  let yourAnswer = document.querySelector("#your-answer")
+  let correctAnswer = document.querySelector("#correct-answer")
+  if (userAnswer.value === card.answer) {
+    correctIncorrect.innerHTML = "Holy shit you did it!"
+    yourAnswer.innerHTML = `Your answer: ${userAnswer.value}`
+    correctAnswer.innerHTML = `The correct answer: ${card.answer}`
+    return true 
+  } else {
+    correctIncorrect.innerHTML = "Utter failure!"
+    yourAnswer.innerHTML = `Your answer: ${userAnswer.value}`
+    correctAnswer.innerHTML = `Correct answer: ${card.answer}`
+    return false
+  }
+}

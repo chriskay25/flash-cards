@@ -14,6 +14,11 @@ class Api::V1::CollectionsController < ApplicationController
     end 
   end 
 
+  def show
+    collection = Collection.find(params[:id])
+    render json: CollectionSerializer.new(collection)
+  end 
+
   private
 
   def collection_params
