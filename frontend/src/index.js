@@ -49,3 +49,21 @@ function delayIteration(collectionCards) {
   collectionCards.forEach(delayLoop(15000))
 }
 
+function checkAnswer(id) {
+  let card = Card.findById(parseInt(id))
+  let userAnswer = document.querySelector("#user-answer")
+  let correctIncorrect = document.querySelector("#correct-incorrect")
+  let yourAnswer = document.querySelector("#your-answer")
+  let correctAnswer = document.querySelector("#correct-answer")
+  if (userAnswer.value === card.answer) {
+    correctIncorrect.innerHTML = "Holy shit you did it!"
+    yourAnswer.innerHTML = `Your answer: ${userAnswer.value}`
+    correctAnswer.innerHTML = `The correct answer: ${card.answer}`
+    return true 
+  } else {
+    correctIncorrect.innerHTML = "Utter failure!"
+    yourAnswer.innerHTML = `Your answer: ${userAnswer.value}`
+    correctAnswer.innerHTML = `Correct answer: ${card.answer}`
+    return false
+  }
+}
