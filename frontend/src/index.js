@@ -40,14 +40,4 @@ function chosenCollection(collection) {
   })
 }
 
-function populateCard(card) {
-  const q = document.querySelector("#question-display")
-  q.innerHTML = card.question
-  const c = document.querySelector("#collection-name")
-  c.innerHTML = card.collection.name
-  const bttn = document.querySelector("#submit-answer")
-  bttn.addEventListener("click", function() {
-    let answer = document.querySelector("#user-answer").value
-    console.log(`submitted: ${answer}`, `actual: ${card.answer}`)
-  })
-}
+
