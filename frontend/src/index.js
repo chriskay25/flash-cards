@@ -34,6 +34,18 @@ function chosenCollection() {
     let newCard = new Card(card)
     collectionCards.push(newCard)
   })
+
+  delayIteration(collectionCards)
 }
 
+function delayIteration(collectionCards) {
+  const delayLoop = (delay) => {
+    return (x, i) => {
+      setTimeout(() => {
+        x.renderCard()
+      }, i * delay);
+    }
+  }
+  collectionCards.forEach(delayLoop(15000))
+}
 
