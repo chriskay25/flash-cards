@@ -13,9 +13,7 @@ class Collection {
     button.dataset.id = this.id 
     collectionChoice.append(button)
 
-    button.addEventListener("click", function() {
-      getChosenCollection(this.dataset.id)
-    })
+    button.addEventListener("click", chosenCollection)
   }
 
   static findById(id) {
