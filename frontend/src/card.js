@@ -12,6 +12,10 @@ class Card {
     return Collection.findById(this.collection_id)
   }
 
+  static findById(id) {
+    return this.all.find(card => parseInt(card.id) === id)
+  }
+
 }
 
 Card.all = []
