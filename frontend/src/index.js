@@ -23,13 +23,6 @@ function getCollections() {
     })
   })
 }
-
-function getChosenCollection(id) {
-  // Fetches cards to pass along
-  fetch(endPoint + `/collections/${id}`)
-    .then(resp => resp.json())
-    .then(collection => chosenCollection(collection.data))
-  }
   
 function chosenCollection(collection) {
   collectionChoice.style.display = "none" // hide collection choice
