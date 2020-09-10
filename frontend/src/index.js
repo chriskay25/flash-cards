@@ -2,6 +2,7 @@ const endPoint = "http://localhost:3000/api/v1"
 const cardForm = document.querySelector(".form-container")
 const cardContainer = document.querySelector("#card-container")
 const collectionChoice = document.querySelector(".collection-choice")
+const scoreboard = document.querySelector("#scoreboard")
 
 document.addEventListener('DOMContentLoaded', () => {
   console.log("Dom is loaded!")
@@ -25,6 +26,7 @@ function getCollections() {
 }
   
 function chosenCollection() {
+  renderScoreboard()
   const collectionCards = []
   collectionChoice.style.display = "none" // hide collection choice
   cardContainer.style.display = "block" // make card container visible
@@ -66,4 +68,11 @@ function checkAnswer(id) {
     correctAnswer.innerHTML = `Correct answer: ${card.answer}`
     return false
   }
+}
+
+function renderScoreboard() {
+  document.querySelector("#scoreboard-header").innerHTML = "Score"
+  let questionNumber = 1
+  let questionNumberDisplay = document.querySelector("#question-number")
+  questionNumberDisplay.innerHTML =  `Question ${questionNumber}`
 }
