@@ -26,11 +26,11 @@ function getCollections() {
 }
   
 function chosenCollection() {
-  renderScoreboard()
   const collectionCards = []
   collectionChoice.style.display = "none" // hide collection choice
   cardContainer.style.display = "block" // make card container visible
   let collection = Collection.findById(parseInt(this.dataset.id))
+  renderScoreboard(collection)
   
   collection.cards.forEach(card => {
     let newCard = new Card(card)
@@ -42,9 +42,9 @@ function chosenCollection() {
 
 function delayIteration(collectionCards) {
   const delayLoop = (delay) => {
-    return (x, i) => {
+    return (card, i) => {
       setTimeout(() => {
-        x.renderCard()
+        card.renderCard()
       }, i * delay);
     }
   }
@@ -70,9 +70,9 @@ function checkAnswer(id) {
   }
 }
 
-function renderScoreboard() {
+function renderScoreboard(collection) {
   document.querySelector("#scoreboard-header").innerHTML = "Score"
   let questionNumber = 1
   let questionNumberDisplay = document.querySelector("#question-number")
-  questionNumberDisplay.innerHTML =  `Question ${questionNumber}`
+  questionNumberDisplay.innerHTML =  `Question ${questionNumber} of ${collection.cards.length}`
 }
