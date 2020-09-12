@@ -3,6 +3,9 @@ const cardForm = document.querySelector(".form-container")
 const cardContainer = document.querySelector("#card-container")
 const collectionChoice = document.querySelector(".collection-choice")
 const scoreboard = document.querySelector("#scoreboard")
+const questionNumberDisplay = document.querySelector("#question-number")
+const displayScore = document.querySelector("#display-score")
+var score;
 
 document.addEventListener('DOMContentLoaded', () => {
   console.log("Dom is loaded!")
@@ -45,6 +48,7 @@ function delayIteration(collectionCards) {
     return (card, i) => {
       setTimeout(() => {
         card.renderCard()
+        questionNumberDisplay.innerHTML =  `Question ${i + 1} of ${collectionCards.length}`
       }, i * delay);
     }
   }
@@ -61,18 +65,17 @@ function checkAnswer(id) {
     correctIncorrect.innerHTML = "Holy shit you did it!"
     yourAnswer.innerHTML = `Your answer: ${userAnswer.value}`
     correctAnswer.innerHTML = `The correct answer: ${card.answer}`
-    return true 
+    displayScore.innerHTML = score += 1
   } else {
     correctIncorrect.innerHTML = "Utter failure!"
     yourAnswer.innerHTML = `Your answer: ${userAnswer.value}`
     correctAnswer.innerHTML = `Correct answer: ${card.answer}`
-    return false
+    displayScore.innerHTML = score
   }
 }
 
 function renderScoreboard(collection) {
   document.querySelector("#scoreboard-header").innerHTML = "Score"
-  let questionNumber = 1
-  let questionNumberDisplay = document.querySelector("#question-number")
-  questionNumberDisplay.innerHTML =  `Question ${questionNumber} of ${collection.cards.length}`
+  score = 0
+  displayScore.innerHTML = score
 }
