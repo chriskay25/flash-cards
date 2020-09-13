@@ -3,40 +3,48 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
   <title>Document</title>
 </head>
 <body>
 
-  <div class="collection-choice">
-  </div>
+  <div class="flash-cards-container container">
 
-  <div class="form-container">
-    <form id="create-card-form">
-      <h3>Create a flash card:</h3>
+    <h1 class="title">FLASH CARDS</h1>
 
-      <input id="input-question" type="text" name="question">
-      <br>
-      <input id="input-answer" type="text" name="answer">
-      <br>
-
-      <input id="create-button" type="submit" name="submit" value="Create Card" class="submit">
-    </form>
-  </div>
-
-  <div id="card-container">
-    <div id="card-display">
+    <div class="collection-choice">
     </div>
-  </div>
-  
-  <p id="question-number"></p>
-  
-  <div id="scoreboard">
-    <h3 id="scoreboard-header"></h3>
-    <div id="score">
-      <p id="display-score"></p>
+
+    <div class="form-container container">
+      <form id="create-card-form">
+        <h3>Create a flash card:</h3>
+
+        <input id="input-question" type="text" name="question">
+        <br>
+        <input id="input-answer" type="text" name="answer">
+        <br>
+
+        <input id="create-button" type="submit" name="submit" value="Create Card" class="submit">
+      </form>
     </div>
-    <div id="timer">
-      
+
+    <div class="card-container container">
+      <div id="card-display">
+      </div>
+    </div>
+
+    <p id="question-number"></p>
+
+    <div class="scoreboard-container container">
+      <div id="scoreboard">
+        <h3 id="scoreboard-header"></h3>
+        <div id="score">
+          <p id="display-score"></p>
+        </div>
+        <div id="timer">
+
+        </div>
+      </div>
     </div>
   </div>
   
