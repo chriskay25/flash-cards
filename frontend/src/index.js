@@ -1,6 +1,6 @@
 const endPoint = "http://localhost:3000/api/v1"
 const cardForm = document.querySelector(".form-container")
-const cardContainer = document.querySelector("#card-container")
+const cardContainer = document.querySelector(".card-container")
 const collectionChoice = document.querySelector(".collection-choice")
 const scoreboard = document.querySelector("#scoreboard")
 const questionNumberDisplay = document.querySelector("#question-number")
@@ -29,30 +29,21 @@ function getCollections() {
 }
   
 function chosenCollection() {
-  const collectionCards = []
   collectionChoice.style.display = "none" // hide collection choice
   cardContainer.style.display = "block" // make card container visible
   let collection = Collection.findById(parseInt(this.dataset.id))
   renderScoreboard(collection)
-  
-  collection.cards.forEach(card => {
-    let newCard = new Card(card)
-    collectionCards.push(newCard)
-  })
-
-  delayIteration(collectionCards)
+  let collectionCards = collection.cards.map(card => { return new Card(card) })
+  collectionCards.forEach(delayLoop(60000))
 }
 
-function delayIteration(collectionCards) {
-  const delayLoop = (delay) => {
-    return (card, i) => {
-      setTimeout(() => {
-        card.renderCard()
-        questionNumberDisplay.innerHTML =  `Question ${i + 1} of ${collectionCards.length}`
-      }, i * delay);
-    }
+const delayLoop = (delay) => {
+  return (card, i) => {
+    setTimeout(() => {
+      card.renderCard()
+      questionNumberDisplay.innerHTML =  `Question ${i + 1} of ${collectionCards.length}`
+    }, i * delay);
   }
-  collectionCards.forEach(delayLoop(15000))
 }
 
 function checkAnswer(id) {
