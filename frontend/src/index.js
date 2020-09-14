@@ -39,37 +39,20 @@ function chosenCollection() {
   let collectionCards = collection.cards.map(card => { return new Card(card) })
   
   collectionCards.forEach(function(card, index) {
-    // debugger
     card.renderCard(index)
   })
 }
 
-// const delayLoop = (delay) => {
-//   return (card, i) => {
-//     setTimeout(() => {
-//       card.renderCard()
-//       questionNumberDisplay.innerHTML =  `Question ${i + 1} of ${card.collection.cards.length}`
-//     }, i * delay);
-//   }
-// }
-
-function checkAnswer(id) {
+function checkAnswer() {
+  let id = this.dataset.id
   let card = Card.findById(parseInt(id))
   let userAnswer = document.querySelector("#user-answer")
-  let correctIncorrect = document.querySelector("#correct-incorrect")
-  let yourAnswer = document.querySelector("#your-answer")
-  let correctAnswer = document.querySelector("#correct-answer")
   if (userAnswer.value === card.answer) {
-    correctIncorrect.innerHTML = "Holy shit you did it!"
-    yourAnswer.innerHTML = `Your answer: ${userAnswer.value}`
-    correctAnswer.innerHTML = `The correct answer: ${card.answer}`
     displayScore.innerHTML = score += 1
   } else {
-    correctIncorrect.innerHTML = "Utter failure!"
-    yourAnswer.innerHTML = `Your answer: ${userAnswer.value}`
-    correctAnswer.innerHTML = `Correct answer: ${card.answer}`
     displayScore.innerHTML = score
   }
+  this.removeEventListener("click", checkAnswer, false)
 }
 
 function renderScoreboard() {
