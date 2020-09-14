@@ -16,12 +16,13 @@ class Card {
     return this.all.find(card => parseInt(card.id) === id)
   }
 
-  renderCard() {
-    // Try to wipe the card clean at the start
+  renderCard(index) {
     const cardDisplay = document.querySelector("#card-display")
-    cardDisplay.innerHTML = ""
-    const h2 = document.createElement("h2")
-    h2.innerHTML = this.collection.name
+    const singleCard = document.createElement("div")
+    singleCard.setAttribute("class", "single")
+    cardDisplay.appendChild(singleCard)
+    const questionNumber = document.createElement("p")
+    questionNumber.innerHTML = `<strong>Question ${index + 1}</strong>`
     const q = document.createElement("p")
     q.innerHTML = this.question
     const userInput = document.createElement("input")
@@ -29,23 +30,11 @@ class Card {
     const button = document.createElement("button")
     button.dataset.id = this.id
     button.innerHTML = "SUBMIT"
-    const correct = document.createElement("p")
-    correct.id = "correct-incorrect"
-    const yourAnswer = document.createElement("p")
-    yourAnswer.id = "your-answer"
-    const correctAnswer = document.createElement("p")
-    correctAnswer.id = "correct-answer"
-    cardDisplay.appendChild(h2)
-    cardDisplay.appendChild(q)
-    cardDisplay.appendChild(userInput)
-    cardDisplay.appendChild(button)
-    cardDisplay.appendChild(correct)
-    cardDisplay.appendChild(yourAnswer)
-    cardDisplay.appendChild(correctAnswer)
-    button.addEventListener("click", function(e) {
-      event.preventDefault()
-      checkAnswer(this.dataset.id)
-    })
+    singleCard.appendChild(questionNumber)
+    singleCard.appendChild(q)
+    singleCard.appendChild(userInput)
+    singleCard.appendChild(button)
+    button.addEventListener("click", checkAnswer, false)
   }
 
 }
