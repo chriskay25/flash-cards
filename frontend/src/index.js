@@ -31,20 +31,27 @@ function getCollections() {
 function chosenCollection() {
   collectionChoice.style.display = "none" // hide collection choice
   cardContainer.style.display = "block" // make card container visible
+  renderScoreboard()
   let collection = Collection.findById(parseInt(this.dataset.id))
-  renderScoreboard(collection)
+  const h2 = document.createElement("h2")
+  h2.innerHTML = collection.name
+  cardContainer.insertAdjacentElement("afterbegin", h2)
   let collectionCards = collection.cards.map(card => { return new Card(card) })
-  collectionCards.forEach(delayLoop(60000))
+  
+  collectionCards.forEach(function(card, index) {
+    // debugger
+    card.renderCard(index)
+  })
 }
 
-const delayLoop = (delay) => {
-  return (card, i) => {
-    setTimeout(() => {
-      card.renderCard()
-      questionNumberDisplay.innerHTML =  `Question ${i + 1} of ${collectionCards.length}`
-    }, i * delay);
-  }
-}
+// const delayLoop = (delay) => {
+//   return (card, i) => {
+//     setTimeout(() => {
+//       card.renderCard()
+//       questionNumberDisplay.innerHTML =  `Question ${i + 1} of ${card.collection.cards.length}`
+//     }, i * delay);
+//   }
+// }
 
 function checkAnswer(id) {
   let card = Card.findById(parseInt(id))
@@ -65,7 +72,7 @@ function checkAnswer(id) {
   }
 }
 
-function renderScoreboard(collection) {
+function renderScoreboard() {
   document.querySelector("#scoreboard-header").innerHTML = "Score"
   score = 0
   displayScore.innerHTML = score
