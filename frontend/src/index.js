@@ -10,7 +10,7 @@ var score;
 document.addEventListener('DOMContentLoaded', () => {
   console.log("Dom is loaded!")
   cardForm.style.display = "none"
-  cardContainer.style.display = "none"
+  scoreboard.style.display = "none"
   getCollections()
 })
 
@@ -30,7 +30,6 @@ function getCollections() {
   
 function chosenCollection() {
   collectionChoice.style.display = "none" // hide collection choice
-  cardContainer.style.display = "block" // make card container visible
   renderScoreboard()
   let collection = Collection.findById(parseInt(this.dataset.id))
   const h2 = document.createElement("h2")
@@ -45,7 +44,6 @@ function chosenCollection() {
 
 function checkAnswer() {
   let id = this.dataset.id
-  // debugger
   let card = Card.findById(parseInt(id))
   let singleCard = document.querySelector(`#card-${id}`)
   let userAnswer = document.querySelector(`#card-${id}-input`)
@@ -62,6 +60,7 @@ function checkAnswer() {
 }
 
 function renderScoreboard() {
+  scoreboard.style.display = "block"
   document.querySelector("#scoreboard-header").innerHTML = "Score"
   score = 0
   displayScore.innerHTML = score
