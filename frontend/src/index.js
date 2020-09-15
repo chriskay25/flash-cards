@@ -36,6 +36,11 @@ function chosenCollection() {
   h2.innerHTML = collection.name
   collectionContainer.insertAdjacentElement("afterbegin", h2)
   let collectionCards = collection.cards.map(card => { return new Card(card) })
+  let bttn = document.createElement("button")
+  bttn.innerHTML = "Add card to collection"
+  bttn.dataset.collectionId = collection.id
+  h2.appendChild(bttn)
+  bttn.addEventListener("click", formHandler)
   
   collectionCards.forEach(function(card, index) {
     card.renderCard(index)
@@ -64,4 +69,10 @@ function renderScoreboard() {
   document.querySelector("#scoreboard-header").innerHTML = "SCORE"
   score = 0
   displayScore.innerHTML = score
+}
+
+function formHandler() {
+  cardForm.style.display = "block"
+  collectionContainer.style.display = "none"
+  scoreboard.style.display = "none"
 }
