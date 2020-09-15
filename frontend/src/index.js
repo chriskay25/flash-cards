@@ -45,13 +45,19 @@ function chosenCollection() {
 
 function checkAnswer() {
   let id = this.dataset.id
+  // debugger
   let card = Card.findById(parseInt(id))
-  let userAnswer = document.querySelector("#user-answer")
+  let singleCard = document.querySelector(`#card-${id}`)
+  let userAnswer = document.querySelector(`#card-${id}-input`)
+
   if (userAnswer.value === card.answer) {
     displayScore.innerHTML = score += 1
+    singleCard.style.backgroundColor = "green"
   } else {
     displayScore.innerHTML = score
+    singleCard.style.backgroundColor = "red"
   }
+  
   this.removeEventListener("click", checkAnswer, false)
 }
 

@@ -20,13 +20,14 @@ class Card {
     const cardDisplay = document.querySelector("#card-display")
     const singleCard = document.createElement("div")
     singleCard.setAttribute("class", "single")
+    singleCard.setAttribute("id", `card-${this.id}`)
     cardDisplay.appendChild(singleCard)
     const questionNumber = document.createElement("p")
     questionNumber.innerHTML = `<strong>Question ${index + 1}</strong>`
     const q = document.createElement("p")
     q.innerHTML = this.question
     const userInput = document.createElement("input")
-    userInput.id = "user-answer"
+    userInput.id = `card-${this.id}-input`
     const button = document.createElement("button")
     button.dataset.id = this.id
     button.innerHTML = "SUBMIT"
