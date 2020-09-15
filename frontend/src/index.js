@@ -1,6 +1,6 @@
 const endPoint = "http://localhost:3000/api/v1"
 const cardForm = document.querySelector(".form-container")
-const cardContainer = document.querySelector(".card-container")
+const collectionContainer = document.querySelector(".collection-container")
 const collectionChoice = document.querySelector(".collection-choice")
 const scoreboard = document.querySelector("#scoreboard")
 const questionNumberDisplay = document.querySelector("#question-number")
@@ -34,7 +34,7 @@ function chosenCollection() {
   let collection = Collection.findById(parseInt(this.dataset.id))
   const h2 = document.createElement("h2")
   h2.innerHTML = collection.name
-  cardContainer.insertAdjacentElement("afterbegin", h2)
+  collectionContainer.insertAdjacentElement("afterbegin", h2)
   let collectionCards = collection.cards.map(card => { return new Card(card) })
   
   collectionCards.forEach(function(card, index) {
@@ -61,7 +61,7 @@ function checkAnswer() {
 
 function renderScoreboard() {
   scoreboard.style.display = "block"
-  document.querySelector("#scoreboard-header").innerHTML = "Score"
+  document.querySelector("#scoreboard-header").innerHTML = "SCORE"
   score = 0
   displayScore.innerHTML = score
 }
