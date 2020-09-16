@@ -1,5 +1,5 @@
 const endPoint = "http://localhost:3000/api/v1"
-const cardForm = document.querySelector(".form-container")
+const cardForm = document.querySelector("#create-card-form")
 const collectionContainer = document.querySelector(".collection-container")
 const collectionChoice = document.querySelector(".collection-choice")
 const scoreboard = document.querySelector("#scoreboard")
@@ -40,7 +40,7 @@ function chosenCollection() {
   bttn.innerHTML = "Add card to collection"
   bttn.dataset.collectionId = collection.id
   h2.appendChild(bttn)
-  bttn.addEventListener("click", formHandler)
+  bttn.addEventListener("click", newCardForm)
   
   collectionCards.forEach(function(card, index) {
     card.renderCard(index)
@@ -71,8 +71,47 @@ function renderScoreboard() {
   displayScore.innerHTML = score
 }
 
-function formHandler() {
+function newCardForm() {
   cardForm.style.display = "block"
-  collectionContainer.style.display = "none"
+  // collectionContainer.style.display = "none"
   scoreboard.style.display = "none"
+  let collectionId = this.dataset.collectionId
+  addListener(collectionId)
 }
+
+const addListener = (collectionId) => {
+  cardForm.addEventListener("submit", function() { 
+    event.preventDefault()
+    const questionInput = document.querySelector('#input-question').value
+    const answerInput = document.querySelector('#input-answer').value
+    postFetch(questionInput, answerInput, collectionId)
+  })
+}
+
+function postFetch(question, answer, collection_id) {
+  const bodyData = {question, answer, collection_id}
+  fetch(endPoint + "/cards", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+    body: JSON.stringify(bodyData)
+  })
+  .then(resp => resp.json())
+  .then(json => testTest(json))
+}
+
+function testTest(cardData) {
+  let card = cardData.data
+  let id = parseInt(card.id)
+  let question = card.attributes.question
+  let answer = card.attributes.answer
+  let collection_id = card.attributes.collection_id
+  const newCard = new Card( {id, question, answer, collection_id} )
+  newCard.renderCard()
+  let qnum = newCard.collection.cards.length + 1
+  debugger
+  document.querySelector(`#card-${newCard.id}`).firstElementChild.innerHTML = `<strong>Question ${qnum}</strong>`
+}
+
