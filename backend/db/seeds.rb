@@ -22,8 +22,17 @@ collection1.cards.create([
   {question: "True or False: the properties(keys) of JS Objects can point to any data type, including other Objects.", answer: "true"}
 ])
 
-collection2 = Collection.create(name: "Biology")
+collection2 = Collection.create(name: "Rails")
 collection2.cards.create([
+  {question: "What is the built-in ORM that Rails utilizes to manage models and communicate with the database?", answer: "active record"},
+  {question: "The routes.rb file can be found in which Rails directory?", answer: "config"},
+  {question: "Does the show action typically correspond with a static route or dynamic route?", answer: "dynamic"},
+  {question: "If you get a 'ForbiddenAttributesError', you probably forgot to use ______", answer: "strong params"},
+  {question: "The only way to trigger validation without touching the database is to call the ______ method", answer: "valid?"}
+])
+
+collection3 = Collection.create(name: "Biology")
+collection3.cards.create([
   {question: "What openings in a leaf allow gas exchange?", answer: "stomata"},
   {question: "Fish take in oxygen through their gills; what do insects take in oxygen through?", answer: "spiracles"},
   {question: "Which nutrient group is used to help grow and repair cells?", answer: "proteins"},
