@@ -1,0 +1,49 @@
+body {
+  box-sizing: border-box;
+  max-width: 1100px;
+  font-size: 1em;
+  margin: 0 auto;
+  padding: 1% 0%;
+}
+
+.container {
+  margin: 0em 1em;
+}
+
+.collection-choice {
+  font-size: 1.4em;
+  padding: 1em 2em;
+  background-color: rgb(208, 224, 224);
+}
+
+.single {
+  background-color: rgb(255 142 142);
+  padding: 1%;
+  margin: 1em;
+}
+
+#display-score {
+  font-size: 2em;
+  font-weight: bold;
+}
+
+#scoreboard {
+  border: black solid;
+  padding: 0em 2em;
+}
+
+button {
+  padding: .5em 1em;
+  margin: 0 1em;
+  font-weight: bold;
+  background-color: black;
+  color: white;
+}
+
+input {
+  margin: .5em;
+}
+
+label {
+  font-weight: bold;
+}
