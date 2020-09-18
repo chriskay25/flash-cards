@@ -73,8 +73,6 @@ function renderScoreboard() {
 
 function newCardForm() {
   cardForm.style.display = "block"
-  // collectionContainer.style.display = "none"
-  scoreboard.style.display = "none"
   let collectionId = this.dataset.collectionId
   addListener(collectionId)
 }
@@ -99,10 +97,10 @@ function postFetch(question, answer, collection_id) {
     body: JSON.stringify(bodyData)
   })
   .then(resp => resp.json())
-  .then(json => testTest(json))
+  .then(cardData => addNewCard(cardData))
 }
 
-function testTest(cardData) {
+function addNewCard(cardData) {
   let card = cardData.data
   let id = parseInt(card.id)
   let question = card.attributes.question
@@ -111,7 +109,8 @@ function testTest(cardData) {
   const newCard = new Card( {id, question, answer, collection_id} )
   newCard.renderCard()
   let qnum = newCard.collection.cards.length + 1
-  debugger
   document.querySelector(`#card-${newCard.id}`).firstElementChild.innerHTML = `<strong>Question ${qnum}</strong>`
+  alert("Card added to collection!")
+  cardForm.style.display = "none"
 }
 
