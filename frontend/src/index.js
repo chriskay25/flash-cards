@@ -47,6 +47,12 @@ function chosenCollection() {
   })
 }
 
+const percentScore = (collection) => {
+  let collectionLength = collection.cards.length
+  let percent = (score / collectionLength) * 100
+  return `${score} / ${collectionLength} = ${percent.toFixed(2)}%`
+}
+
 function checkAnswer() {
   let id = this.dataset.id
   let card = Card.findById(parseInt(id))
@@ -54,13 +60,16 @@ function checkAnswer() {
   let userAnswer = document.querySelector(`#card-${id}-input`)
 
   if (userAnswer.value === card.answer) {
-    displayScore.innerHTML = score += 1
+    score +=1
     singleCard.style.backgroundColor = "green"
   } else {
-    displayScore.innerHTML = score
     singleCard.style.backgroundColor = "red"
+    let correctAnswer = document.createElement("span")
+    correctAnswer.innerHTML = `Correct Answer: ${card.answer}`
+    singleCard.appendChild(correctAnswer)
   }
   
+  displayScore.innerHTML = percentScore(card.collection)
   this.removeEventListener("click", checkAnswer, false)
 }
 
