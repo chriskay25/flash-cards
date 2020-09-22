@@ -4,42 +4,17 @@ class Card {
     this.id = data.id
     this.question = data.question
     this.answer = data.answer
-    this.collection_id = data.collection_id
+    this.collectionId = data.collection_id // use camelCase
     Card.all.push(this)
   }
 
   get collection() {
-    return Collection.findById(this.collection_id)
+    return Collection.findById(this.collectionId)
   }
 
   static findById(id) {
     return this.all.find(card => parseInt(card.id) === id)
   }
-
-  // renderCard(index) {
-  //   const cardHolder = document.querySelector(".carousel-inner")
-  //   const cardDisplay = document.createElement("div")
-  //   cardDisplay.setAttribute("class", "carousel-item active")
-  //   cardHolder.appendChild(cardDisplay)
-  //   const singleCard = document.createElement("div")
-  //   singleCard.setAttribute("class", "d-block w-100")
-  //   singleCard.setAttribute("id", `card-${this.id}`)
-  //   cardDisplay.appendChild(singleCard)
-  //   const questionNumber = document.createElement("p")
-  //   questionNumber.innerHTML = `<strong>Question ${index + 1}</strong>`
-  //   const q = document.createElement("p")
-  //   q.innerHTML = this.question
-  //   const userInput = document.createElement("input")
-  //   userInput.id = `card-${this.id}-input`
-  //   const button = document.createElement("button")
-  //   button.dataset.id = this.id
-  //   button.innerHTML = "SUBMIT"
-  //   singleCard.appendChild(questionNumber)
-  //   singleCard.appendChild(q)
-  //   singleCard.appendChild(userInput)
-  //   singleCard.appendChild(button)
-  //   button.addEventListener("click", checkAnswer, false)
-  // }
 
   renderCard(index) {
     const cardDisplay = document.querySelector(".carousel-inner")
