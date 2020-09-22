@@ -25,7 +25,7 @@
 
   <div class="flash-cards-container container-fluid">
 
-    <div class="collection-choice">
+    <div class="collection-choice container">
     </div>
 
     <div class="form-container container">
@@ -42,27 +42,32 @@
       </form>
     </div>
 
-    <div class="collection-container container">
-      <div id="card-display">
-        <div id="cardCarousel" class="carousel slide" data-ride="carousel">
-          <div class="carousel-inner">
-          
+    <div id="card-scoreboard" class="container-fluid">
+      <div class="row">
+        <div class="collection-container col-8">
+          <div id="card-display">
+            <div id="cardCarousel" class="carousel slide" data-ride="carousel">
+              <div class="carousel-inner">
+              
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
 
-    <div class="scoreboard-container container">
-      <div id="scoreboard">
-        <h3 id="scoreboard-header"></h3>
-        <div id="score">
-          <p id="display-score"></p>
+        <div class="scoreboard-container col-4">
+          <div id="scoreboard">
+            <h3 id="scoreboard-header"></h3>
+            <div id="score">
+              <p id="display-score"></p>
+            </div>
+            <div id="timer"></div>
+          </div>
         </div>
-        <div id="timer">
 
-        </div>
       </div>
+
     </div>
+  
   </div>
   
   <script type="application/javascript" src="src/index.js"></script>
