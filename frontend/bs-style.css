@@ -1,0 +1,28 @@
+#scoreboard {
+  background-color: cornflowerblue;
+  color: white;
+  padding: 1em;
+  height: 100%;
+}
+
+.card-body {
+  background-color: #343a40;
+  color: white;
+}
+
+h2 {
+  font-weight: bold;
+}
+
+h3 {
+  margin-top: 1.5em;
+}
+
+.carousel {
+  transition: transform 4s ease;
+}
+
+.collection-btn {
+  margin: 1em;
+  border: black solid 2px;
+}
