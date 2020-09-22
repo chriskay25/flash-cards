@@ -5,6 +5,8 @@ const collectionChoice = document.querySelector(".collection-choice")
 const scoreboard = document.querySelector("#scoreboard")
 const displayScore = document.querySelector("#display-score")
 let score;
+let collection;
+
 
 document.addEventListener('DOMContentLoaded', () => {
   console.log("Dom is loaded!")
@@ -27,10 +29,14 @@ function getCollections() {
   })
 }
   
-function chosenCollection() {
+function chosenCollection(coll_id) {
   collectionChoice.style.display = "none" // hide collection choice
   renderScoreboard()
-  let collection = Collection.findById(parseInt(this.dataset.id))
+  if (coll_id === true) { // when called by addNewCard()
+    collection = Collection.findById(coll_id)
+  } else {
+    collection = Collection.findById(parseInt(this.dataset.id))
+  }
   const h2 = document.createElement("h2")
   h2.innerHTML = `Collection: ${collection.name}`
   cardScoreboard.insertAdjacentElement("afterbegin", h2)
@@ -73,16 +79,17 @@ function checkAnswer() {
   let card = Card.findById(parseInt(id))
   let singleCard = document.querySelector(`#card-${id}`)
   let userAnswer = document.querySelector(`#card-${id}-input`)
-  // debugger
+  let correctAnswer = document.createElement("span")
+  correctAnswer.setAttribute("id", "correct-answer")
+  singleCard.appendChild(correctAnswer)
 
   if (userAnswer.value === card.answer) {
     score +=1
     singleCard.style.backgroundColor = "#6acc80"
+    correctAnswer.innerHTML = "Correct!"
   } else {
     singleCard.style.backgroundColor = "#dc3545"
-    let correctAnswer = document.createElement("span")
     correctAnswer.innerHTML = `Correct Answer: ${card.answer}`
-    singleCard.appendChild(correctAnswer)
   }
   
   displayScore.innerHTML = percentScore(card.collection)
