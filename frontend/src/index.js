@@ -3,9 +3,8 @@ const cardForm = document.querySelector("#create-card-form")
 const cardScoreboard = document.querySelector("#card-scoreboard")
 const collectionChoice = document.querySelector(".collection-choice")
 const scoreboard = document.querySelector("#scoreboard")
-// const questionNumberDisplay = document.querySelector("#question-number")
 const displayScore = document.querySelector("#display-score")
-var score;
+let score;
 
 document.addEventListener('DOMContentLoaded', () => {
   console.log("Dom is loaded!")

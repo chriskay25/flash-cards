@@ -11,11 +11,12 @@ class Collection {
     let button = document.createElement("button")
     button.innerHTML = this.name
     button.dataset.id = this.id 
+    button.setAttribute("class", "btn collection-btn")
     collectionChoice.append(button)
 
     button.addEventListener("click", chosenCollection)
   }
-
+    
   static findById(id) {
     return this.all.find(collection => parseInt(collection.id) === id);
   }
