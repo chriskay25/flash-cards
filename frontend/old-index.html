@@ -12,20 +12,11 @@
 </head>
 <body>
 
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
-    <a class="navbar-brand" href="#">FLASH CARD APP</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <a class="nav-link" href="http://localhost:3000/api/v1/collections">Collections</a>
-      <a class="nav-link" href="http://localhost:3000/api/v1/cards">Cards</a>
-    </div>
-  </nav>
+  <div class="flash-cards-container container">
+    
+    <h1 class="title">FLASH CARDS</h1>
 
-  <div class="flash-cards-container container-fluid">
-
-    <div class="collection-choice container">
+    <div class="collection-choice">
     </div>
 
     <div class="form-container container">
@@ -42,32 +33,22 @@
       </form>
     </div>
 
-    <div id="card-scoreboard" class="container-fluid">
-      <div class="row">
-        <div class="collection-container col-8">
-          <div id="card-display">
-            <div id="cardCarousel" class="carousel slide" data-ride="carousel">
-              <div class="carousel-inner">
-              
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="scoreboard-container col-4">
-          <div id="scoreboard">
-            <h3 id="scoreboard-header"></h3>
-            <div id="score">
-              <p id="display-score"></p>
-            </div>
-            <div id="timer"></div>
-          </div>
-        </div>
-
+    <div class="collection-container container">
+      <div id="card-display">
       </div>
-
     </div>
-  
+
+    <div class="scoreboard-container container">
+      <div id="scoreboard">
+        <h3 id="scoreboard-header"></h3>
+        <div id="score">
+          <p id="display-score"></p>
+        </div>
+        <div id="timer">
+
+        </div>
+      </div>
+    </div>
   </div>
   
   <script type="application/javascript" src="src/index.js"></script>

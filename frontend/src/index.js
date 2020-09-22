@@ -1,11 +1,10 @@
 const endPoint = "http://localhost:3000/api/v1"
 const cardForm = document.querySelector("#create-card-form")
-const collectionContainer = document.querySelector(".collection-container")
+const cardScoreboard = document.querySelector("#card-scoreboard")
 const collectionChoice = document.querySelector(".collection-choice")
 const scoreboard = document.querySelector("#scoreboard")
-const questionNumberDisplay = document.querySelector("#question-number")
 const displayScore = document.querySelector("#display-score")
-var score;
+let score;
 
 document.addEventListener('DOMContentLoaded', () => {
   console.log("Dom is loaded!")
@@ -33,10 +32,12 @@ function chosenCollection() {
   renderScoreboard()
   let collection = Collection.findById(parseInt(this.dataset.id))
   const h2 = document.createElement("h2")
-  h2.innerHTML = collection.name
-  collectionContainer.insertAdjacentElement("afterbegin", h2)
+  h2.innerHTML = `Collection: ${collection.name}`
+  cardScoreboard.insertAdjacentElement("afterbegin", h2)
+  h2.setAttribute("class", "py-5")
   let collectionCards = collection.cards.map(card => { return new Card(card) })
   let bttn = document.createElement("button")
+  bttn.setAttribute("class", "btn btn-light")
   bttn.innerHTML = "Add card to collection"
   bttn.dataset.collectionId = collection.id
   h2.appendChild(bttn)
@@ -44,6 +45,20 @@ function chosenCollection() {
   
   collectionCards.forEach(function(card, index) {
     card.renderCard(index)
+    let bttn = document.querySelector(`button[data-id="${card.id}"]`)
+    bttn.addEventListener("click", checkAnswer)
+  })
+  
+  $('.carousel').carousel('pause') // Pause card rotation
+
+}
+
+const nextQuestion = (bttn) => {
+  bttn.innerHTML = "NEXT"
+  bttn.style.backgroundColor = "yellow"
+  bttn.style.color = "black"
+  bttn.addEventListener("click", (e) => {
+    $('.carousel').carousel('next') // Rotate card
   })
 }
 
@@ -58,19 +73,21 @@ function checkAnswer() {
   let card = Card.findById(parseInt(id))
   let singleCard = document.querySelector(`#card-${id}`)
   let userAnswer = document.querySelector(`#card-${id}-input`)
+  // debugger
 
   if (userAnswer.value === card.answer) {
     score +=1
-    singleCard.style.backgroundColor = "green"
+    singleCard.style.backgroundColor = "#6acc80"
   } else {
-    singleCard.style.backgroundColor = "red"
+    singleCard.style.backgroundColor = "#dc3545"
     let correctAnswer = document.createElement("span")
     correctAnswer.innerHTML = `Correct Answer: ${card.answer}`
     singleCard.appendChild(correctAnswer)
   }
   
   displayScore.innerHTML = percentScore(card.collection)
-  this.removeEventListener("click", checkAnswer, false)
+  this.removeEventListener("click", checkAnswer)
+  nextQuestion(this)
 }
 
 function renderScoreboard() {
@@ -81,6 +98,7 @@ function renderScoreboard() {
 }
 
 function newCardForm() {
+  cardScoreboard.style.display = "none"
   cardForm.style.display = "block"
   let collectionId = this.dataset.collectionId
   addListener(collectionId)
