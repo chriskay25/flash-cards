@@ -47,13 +47,14 @@ class Card {
     index === 0 ? card.setAttribute("class", "carousel-item active") : card.setAttribute("class", "carousel-item")
     cardDisplay.append(card)
     const cardInner = `
-        <div class="card d-block w-100" style="width: 18rem;">
-          <div class="card-body">
-            <h5 class="card-title">Question ${index + 1}</h5>
-            <p class="card-text">${this.question}</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-          </div>
+      <div class="card d-block w-100" style="width: 18rem;">
+        <div id="card-${this.id}" class="card-body">
+          <h5 class="card-title">Question ${index + 1}</h5>
+          <p class="card-text">${this.question}</p>
+          <input id="card-${this.id}-input" class="card-text" type="text" />
+          <button data-id="${this.id}" class="btn btn-primary">SUBMIT</a>
         </div>
+      </div>
     `
     card.innerHTML += cardInner
   }
