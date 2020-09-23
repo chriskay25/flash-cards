@@ -30,16 +30,19 @@
 
     <div class="form-container container">
       <form id="create-card-form">
-        <h2>Create a flash card:</h2>
+        <h2 id="form-h2">Create a flash card:</h2>
           <div class="form-group">
-            <label for="input-question" class="form-control">Question:</label>
+            <label for="input-question">Question:</label>
             <input id="input-question" type="text" name="input-question" class="form-control">
             <br>
-            <label for="input-answer" class="form-control">Answer:</label>
-            <input id="input-answer" type="text" name="input-answer" class="form-control">
+            <label for="input-answer">Answer:</label>
+            <input id="input-answer" type="text" name="input-answer" class="form-control" aria-describedby="answerHelp">
+            <small id="answerHelp" class="form-text text-muted">
+              Note: your answer will be saved exactly as typed, so be aware of things like spelling, punctuation, capitalization, etc.
+            </small>
             <br>
 
-            <input id="create-button" type="submit" name="submit" value="Create Card" class="submit form-control">
+            <input id="create-button" type="submit" name="submit" value="Create Card" class="btn btn-primary" form-control">
           </div>
       </form>
     </div>
@@ -69,9 +72,9 @@
   
   </div>
   
-  <script type="application/javascript" src="src/index.js"></script>
-  <script type="application/javascript" src="src/card.js"></script>
   <script type="application/javascript" src="src/collection.js"></script>
+  <script type="application/javascript" src="src/card.js"></script>
+  <script type="application/javascript" src="src/index.js"></script>
   <!-- Bootstrap scripts -->
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
