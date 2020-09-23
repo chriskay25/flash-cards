@@ -27,7 +27,7 @@ class Card {
           <h5 class="card-title">Question ${index + 1}</h5>
           <p class="card-text">${this.question}</p>
           <input id="card-${this.id}-input" class="card-text" type="text" />
-          <button data-id="${this.id}" class="btn btn-primary">SUBMIT</a>
+          <button data-id="${this.id}" class="btn btn-primary">SUBMIT</button>
         </div>
       </div>
     `

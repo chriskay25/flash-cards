@@ -117,7 +117,6 @@ const addListener = (collectionId) => {
     const questionInput = document.querySelector('#input-question').value
     const answerInput = document.querySelector('#input-answer').value
     const postedCard = postCard("/cards", questionInput, answerInput, collectionId)
-    // postedCard.then(card => console.log(card))
   })
 }
 
@@ -135,11 +134,6 @@ function addNewCard(card) {
   let answer = card.attributes.answer
   let collection_id = card.attributes.collection_id
   const newCard = new Card( {id, question, answer, collection_id} )
-  console.log(newCard)
-  newCard.renderCard()
-  let qnum = newCard.collection.cards.length + 1
-  document.querySelector(`#card-${newCard.id}`).firstElementChild.innerHTML = `<strong>Question ${qnum}</strong>`
-  alert("Card added to collection!")
-  cardForm.style.display = "none"
+  return newCard
 }
 
