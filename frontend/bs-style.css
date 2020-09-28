@@ -26,3 +26,11 @@ h3 {
   margin: 1em;
   border: black solid 2px;
 }
+
+#correct-answer {
+  padding-left: 1em;
+}
+
+#form-h2 {
+  padding: 1em 0em .5em;
+}

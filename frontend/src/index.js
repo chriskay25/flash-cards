@@ -1,4 +1,5 @@
 const endPoint = "http://localhost:3000/api/v1"
+const api = new ApiAdapter
 const cardForm = document.querySelector("#create-card-form")
 const cardScoreboard = document.querySelector("#card-scoreboard")
 const collectionChoice = document.querySelector(".collection-choice")
@@ -16,17 +17,16 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 function getCollections() {
-  fetch(endPoint + "/collections")
-  .then(resp => resp.json())
-  .then(collections => {
-    const offerChoice = document.createElement('h3')
-    offerChoice.innerHTML = "Which collection would you like to study?"
-    collectionChoice.append(offerChoice)
-    collections.data.forEach(collection => {
-      let newCollection = new Collection(collection)
-      newCollection.renderCollectionButton()
+  const colls = api.get("/collections")
+    .then(collections => {
+      const offerChoice = document.createElement('h3')
+      offerChoice.innerHTML = "Which collection would you like to study?"
+      collectionChoice.append(offerChoice)
+      collections.data.forEach(collection => {
+        let newCollection = new Collection(collection)
+        newCollection.renderCollectionButton()
+      })
     })
-  })
 }
   
 function chosenCollection(coll_id) {
@@ -116,35 +116,24 @@ const addListener = (collectionId) => {
     event.preventDefault()
     const questionInput = document.querySelector('#input-question').value
     const answerInput = document.querySelector('#input-answer').value
-    postFetch(questionInput, answerInput, collectionId)
+    const postedCard = postCard("/cards", questionInput, answerInput, collectionId)
   })
 }
 
-function postFetch(question, answer, collection_id) {
-  const bodyData = {question, answer, collection_id}
-  fetch(endPoint + "/cards", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Accept: "application/json",
-    },
-    body: JSON.stringify(bodyData)
-  })
-  .then(resp => resp.json())
-  .then(cardData => addNewCard(cardData))
+function postCard(url, questionInput, answerInput, collectionId) {
+  api.post(url, questionInput, answerInput, collectionId)
+    .then(cardData => {
+      const card = cardData.data
+      addNewCard(card)
+    })
 }
 
-function addNewCard(cardData) {
-  let card = cardData.data
+function addNewCard(card) {
   let id = parseInt(card.id)
   let question = card.attributes.question
   let answer = card.attributes.answer
   let collection_id = card.attributes.collection_id
   const newCard = new Card( {id, question, answer, collection_id} )
-  newCard.renderCard()
-  let qnum = newCard.collection.cards.length + 1
-  document.querySelector(`#card-${newCard.id}`).firstElementChild.innerHTML = `<strong>Question ${qnum}</strong>`
-  alert("Card added to collection!")
-  cardForm.style.display = "none"
+  return newCard
 }
 
